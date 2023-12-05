@@ -1,0 +1,79 @@
+#!/bin/sh
+
+"$AMSBIN/ams" << eor
+
+Task GeometryOptimization
+Properties
+    NormalModes Yes
+End
+GeometryOptimization
+    InitialHessian
+        Type FromFile
+        File dep-adf.rkf
+    End
+    Convergence
+        Energy 1e-06
+        Gradients 0.0001
+        Step 0.001
+    End
+    MaxRestarts 1
+End
+System
+    Atoms
+        Pa 0.4203347752342013 -0.1594321030688783 -0.2297098658228121 adf.R=2.200
+        O 1.023507361406082 1.347520485283564 -1.582922987645941 adf.R=1.517
+        H 1.44505709137437 2.214949055843902 -1.545116723920194 adf.R=1.350
+        O -1.052976821242347 1.132627099992982 0.6257045038412321 adf.R=1.517
+        H -1.325062514785665 2.029455179389506 0.3973451122522255 adf.R=1.350
+        O -0.4300350349402438 -1.234422508299945 -1.865171834692909 adf.R=1.517
+        H -0.8764559821449404 -2.085937321307366 -1.939940054819145 adf.R=1.350
+        O -0.1684679839949526 -1.664200128188171 1.132674952397883 adf.R=1.517
+        H 0.00941934431535528 -2.600119987084435 1.287638781801058 adf.R=1.350
+        O 2.314487776217546 0.3365292649907003 1.139060440915666 adf.R=1.517
+        O 2.521495139021958 -1.294847798475176 -0.5426218594282457 adf.R=1.517
+        S 3.360882862538255 -0.6233057638743273 0.5510445536515722 adf.R=1.792
+        O 4.464096945517521 0.1246159589603012 -0.03581850863873837 adf.R=1.517
+        O 3.775673852644678 -1.597852815156892 1.550627023683543 adf.R=1.517
+    End
+    Charge -1
+    BondOrders
+         1 2 1.0
+         1 4 1.0
+         1 6 1.0
+         1 8 1.0
+         1 10 1.0
+         1 11 1.0
+         2 3 1.0
+         4 5 1.0
+         6 7 1.0
+         8 9 1.0
+         10 12 1.0
+         11 12 1.0
+         12 13 1.0
+         12 14 1.0
+    End
+End
+
+Engine ADF
+    Basis
+        Type TZ2P
+        Core None
+    End
+    XC
+        Hybrid B3LYP
+    End
+    Solvation
+        Surf Delley
+        Solv name=Water cav0=0.0 cav1=0.0067639
+        Charged method=CONJ
+        C-Mat POT
+        SCF VAR ALL 
+        CSMRSP
+    End
+    NumericalQuality Good
+EndEngine
+eor
+
+# dependency: {} /home/shaaban/ams/PhD/sulfate/pa_oh4_so4/solvation/B21/pa_oh4_so4.SR.b3lyp.tz2p.opt-freq-B21-solvation.results/adf.rkf dep-adf.rkf
+
+

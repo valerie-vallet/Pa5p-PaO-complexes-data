@@ -1,0 +1,76 @@
+#!/bin/sh
+
+"$AMSBIN/ams" << eor
+
+Task GeometryOptimization
+Properties
+    NormalModes Yes
+End
+GeometryOptimization
+    InitialHessian
+        Type FromFile
+        File dep-adf.rkf
+    End
+    Convergence
+        Energy 1e-06
+        Gradients 0.0001
+        Step 0.001
+    End
+    MaxRestarts 1
+End
+System
+    Atoms
+        Pa -0.2693342318626933 0.4928167162365999 0.006618085626743375 adf.R=2.200
+        O 1.296224354200514 1.120600087779756 -1.260545977244745 adf.R=1.517
+        H -1.390904712415189 0.591119096789799 -2.61483594360223 adf.R=1.350
+        O -1.490577622637339 -0.3160131170720709 1.175668052536243 adf.R=1.517
+        O -1.562280975480008 0.2616849367268106 -1.724879364556401 adf.R=1.517
+        O 0.8212068919023612 -1.758284517179464 -0.2178211915551385 adf.R=1.517
+        H 1.521291500293583 -1.979494559873308 -0.8456319448554465 adf.R=1.350
+        H 0.4616886433882188 -2.590584050891019 0.1149479634767212 adf.R=1.350
+        H 1.431721092171375 1.54448021679089 -2.117306704763743 adf.R=1.350
+        O 0.4577051012622395 2.152822107009991 1.672385036444395 adf.R=1.517
+        O -1.210722164469275 2.738741610641782 0.1122326302868432 adf.R=1.517
+        N -0.4344972354938529 3.329155279717305 1.289260238250429 adf.R=1.608
+        O -0.3358267556751467 4.526635388110479 1.926367392828855 adf.R=1.517
+    End
+    BondOrders
+         1 2 1.0
+         1 4 1.0
+         1 5 1.0
+         1 6 1.0
+         1 10 1.0
+         1 11 1.0
+         2 9 1.0
+         3 5 1.0
+         6 7 1.0
+         6 8 1.0
+         10 12 1.0
+         11 12 1.0
+         13 12 1.0
+    End
+End
+
+Engine ADF
+    Basis
+        Type TZ2P
+        Core None
+    End
+    XC
+        Hybrid B3LYP
+    End
+    Solvation
+        Surf Delley
+        Solv name=Water cav0=0.0 cav1=0.0067639
+        Charged method=CONJ
+        C-Mat POT
+        SCF VAR ALL 
+        CSMRSP
+    End
+    NumericalQuality Good
+EndEngine
+eor
+
+# dependency: {} /home/shaaban/ams/PhD/sulfate/pao_oh2_so4_h2o/solvation/pao_oh2_so4_h2o.SR.b3lyp.tz2p.opt-freq-A2-solvation.results/adf.rkf dep-adf.rkf
+
+

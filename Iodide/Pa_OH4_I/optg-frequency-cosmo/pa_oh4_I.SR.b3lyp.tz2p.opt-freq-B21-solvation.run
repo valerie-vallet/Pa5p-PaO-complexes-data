@@ -1,0 +1,61 @@
+#!/bin/sh
+
+"$AMSBIN/ams" << eor
+
+Task GeometryOptimization
+Properties
+    NormalModes Yes
+End
+GeometryOptimization
+    Convergence
+        Energy 1e-06
+        Gradients 0.0001
+        Step 0.001
+    End
+End
+System
+    Atoms
+        Pa 0.3032349736969296 -0.03407433560040442 0.01622143262101602 adf.R=2.200
+        O 1.011369143362424 1.56595252884213 -1.096161820201486 adf.R=1.517
+        H 1.490980013165904 2.057542909630168 -1.768006962824952 adf.R=1.350
+        O -1.373469404241239 1.106229232540857 0.556508118907895 adf.R=1.517
+        H -1.769537365196578 1.974634539526547 0.4440702377260212 adf.R=1.350
+        O 0.3449834028522878 -1.231827874538577 -1.704064301847596 adf.R=1.517
+        H 0.1772179781133646 -2.113416666836734 -2.047207488001388 adf.R=1.350
+        O -0.438689963722943 -1.634762899398696 1.100973691668817 adf.R=1.517
+        H -0.8643506940261458 -2.178323497863761 1.768684156568518 adf.R=1.350
+        I 2.766142592518963 0.03913366469539261 1.750339645831584 adf.R=1.967
+    End
+    BondOrders
+         1 2 1.0
+         1 4 1.0
+         1 6 1.0
+         1 8 1.0
+         1 10 1.0
+         2 3 1.0
+         4 5 1.0
+         6 7 1.0
+         8 9 1.0
+    End
+End
+
+Engine ADF
+    Basis
+        Type TZ2P
+        Core None
+    End
+    XC
+        Hybrid B3LYP
+    End
+    Solvation
+        Surf Delley
+        Solv name=Water cav0=0.0 cav1=0.0067639
+        Charged method=CONJ
+        C-Mat POT
+        SCF VAR ALL 
+        CSMRSP
+    End
+    NumericalQuality Good
+EndEngine
+eor
+

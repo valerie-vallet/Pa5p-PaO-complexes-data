@@ -1,0 +1,76 @@
+#!/bin/sh
+
+"$AMSBIN/ams" << eor
+
+Task GeometryOptimization
+Properties
+    NormalModes Yes
+End
+GeometryOptimization
+    InitialHessian
+        Type FromFile
+        File dep-adf.rkf
+    End
+    Convergence
+        Energy 1e-06
+        Gradients 0.0001
+        Step 0.001
+    End
+    MaxRestarts 1
+End
+System
+    Atoms
+        Pa 0.4116917023686156 -0.08058775153144329 0.1065640287606306 adf.R=2.200
+        O 1.222915216337468 1.488240276656725 -1.009689954535251 adf.R=1.517
+        H 1.313476134384798 1.855211266355426 -1.898065860762685 adf.R=1.350
+        O -1.391373020183269 0.9739960050661243 0.4381076999721084 adf.R=1.517
+        H -1.7779759745604 1.796558629413372 0.1150558909777972 adf.R=1.350
+        O -0.0653829600713704 -1.164022622463957 -1.590159011705453 adf.R=1.517
+        H -0.249068311866495 -1.740290836840935 -2.338283261381239 adf.R=1.350
+        O -0.1470970186226533 -1.616369459141007 1.413494713040614 adf.R=1.517
+        H -0.8186545644721027 -2.284556039854017 1.598808791533313 adf.R=1.350
+        O 2.487262463462151 0.1345970402775963 1.518831984118716 adf.R=1.517
+        O 2.65235560524288 -1.231337682094819 -0.1462939570798713 adf.R=1.517
+        N 3.21984646423959 -0.6832929012665803 0.8599572324249171 adf.R=1.608
+        O 4.364177657822912 -0.9188711275129446 1.16754541060934 adf.R=1.517
+    End
+    BondOrders
+         1 2 1.0
+         1 4 1.0
+         1 6 1.0
+         1 8 1.0
+         1 10 1.0
+         1 11 1.0
+         2 3 1.0
+         4 5 1.0
+         6 7 1.0
+         8 9 1.0
+         10 12 1.0
+         11 12 1.0
+         12 13 1.0
+    End
+End
+
+Engine ADF
+    Basis
+        Type TZ2P
+        Core None
+    End
+    XC
+        Hybrid B3LYP
+    End
+    Solvation
+        Surf Delley
+        Solv name=Water cav0=0.0 cav1=0.0067639
+        Charged method=CONJ
+        C-Mat POT
+        SCF VAR ALL 
+        CSMRSP
+    End
+    NumericalQuality Good
+EndEngine
+eor
+
+# dependency: {} /home/shaaban/ams/PhD/nitrate/pa_oh4_no3/solvation/B21/pa_oh4_no3.SR.b3lyp.tz2p.opt-freq-B21-solvation.results/adf.rkf dep-adf.rkf
+
+
